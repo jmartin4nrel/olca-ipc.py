@@ -474,18 +474,36 @@ class Client(object):
         for r in result:
             yield clazz.from_json(r)
 
-    def find(self, model_type: ModelType, name: str) -> Optional[schema.Ref]:
+    def find(self, model_type: ModelType, name: str, list_all:bool=False, \
+            category_path:list=[]) -> Optional[schema.Ref]:
         """Searches for a data set with the given type and name.
 
         :param model_type: The class of the data set, e.g. `olca.Flow`.
         :param name: The name of the data set.
+        :optional param list_all: boolean, whether to list all instance of this
+                name in the database. Return list of Refs if true, Ref if false.
+        :optional param category_path: list of subfolders containing data set.
+                 If not passed, searches for the first data set in the database.
         :return: The reference to the first data set with the given name and
                  type from the databases or ``None`` if there is no such data
                  set in the database.
         """
+        if list_all:
+            d_list = []
         for d in self.get_descriptors(model_type):
-            if d.name == name:
-                return d
+            if name in d.name:
+                if category_path == []:
+                    if list_all:
+                        d_list.append(d)
+                    else:
+                        return d
+                elif d.category_path[0:len(category_path)] == category_path:
+                    d_list.append(d)
+        if list_all:
+            if len(d_list) == 1:
+                return d_list[0]
+            elif len(d_list) > 1: 
+                return d_list
 
     def get_providers_of(self, flow: Union[schema.Ref, schema.Flow]) \
             -> Iterator[schema.Ref]:
