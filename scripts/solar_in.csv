@@ -1,0 +1,58 @@
+Elementary flows,resource,,,,Heat,10172.85009
+Elementary flows,resource,water,,,"Water, fresh",0.041474307
+Elementary flows,resource,ground,,,Coal,0.006208766
+Elementary flows,resource,air,,,Natural gas,0.002946942
+Elementary flows,resource,water,,,Crude oil,0.00177426
+Elementary flows,resource,ground,terrestrial,forest,Land use,0.000321647
+Elementary flows,resource,ground,,,Stone,0.000171604
+Elementary flows,resource,air,,,"Energy, wind",0.00017076
+Elementary flows,resource,water,,,"Energy, hydro",7.75695E-05
+Elementary flows,resource,ground,,,Gravel,6.94655E-05
+Elementary flows,resource,ground,,,Sand,6.94655E-05
+Elementary flows,resource,air,,,"Energy, solar",4.81963E-05
+Elementary flows,resource,ground,human-dominated,industrial,Land use,2.91222E-05
+Elementary flows,resource,ground,human-dominated,agricultural,Land use,1.52564E-05
+Elementary flows,resource,ground,terrestrial,grassland,Land use,1.07E-05
+Elementary flows,resource,water,,,"Water, saline",1.01354E-05
+Elementary flows,resource,ground,,,Sodium chloride,8.96119E-06
+Elementary flows,resource,ground,human-dominated,,Land use,8.37434E-06
+Elementary flows,resource,ground,,,Iron,7.90873E-06
+Elementary flows,resource,ground,,,Phosphate ore,5.00481E-06
+Elementary flows,resource,ground,,,Clay,2.93504E-06
+Elementary flows,resource,ground,,,Limestone,2.67175E-06
+Elementary flows,resource,ground,,,Sodium carbonate,2.31448E-06
+Elementary flows,resource,ground,,,Gypsum,2.17601E-06
+Elementary flows,resource,ground,,,Peat,1.60449E-06
+Elementary flows,resource,ground,,,Kaolin,1.24824E-06
+Elementary flows,resource,ground,,,Copper,9.76621E-07
+Elementary flows,resource,ground,,,Bentonite,9.4953E-07
+Elementary flows,resource,ground,,,Boron,7.72812E-07
+Elementary flows,resource,ground,,,Zinc,5.93101E-07
+Elementary flows,resource,ground,,,Lead,2.53066E-07
+Elementary flows,resource,ground,,,Diatomite,1.78235E-07
+Elementary flows,resource,ground,,,Potassium,1.39586E-07
+Elementary flows,resource,ground,,,Magnesium,1.3388E-07
+Elementary flows,resource,ground,,,Barite,1.31154E-07
+Elementary flows,resource,ground,,,Talc,1.20669E-07
+Elementary flows,resource,ground,,,Feldspar group,1.04844E-07
+Elementary flows,resource,ground,,,Perlite,8.92163E-08
+Elementary flows,resource,ground,,,Pumice,5.49936E-08
+Elementary flows,resource,ground,,,Titanium,2.78612E-08
+Elementary flows,resource,ground,,,Fluorite,2.25513E-08
+Elementary flows,resource,ground,,,Kyanite,2.17601E-08
+Elementary flows,resource,ground,,,Zirconium,2.06488E-08
+Elementary flows,resource,ground,,,Vermiculite,1.97819E-08
+Elementary flows,resource,ground,,,Zeolites,1.26802E-08
+Elementary flows,resource,ground,,,Mica,9.09966E-09
+Elementary flows,resource,ground,,,Garnet group,6.36976E-09
+Elementary flows,resource,ground,,,Molybdenum,3.17036E-09
+Elementary flows,resource,ground,,,Nickel,2.5663E-09
+Elementary flows,resource,ground,,,Cerium,2.04356E-09
+Elementary flows,resource,ground,,,Silver,5.48538E-10
+Elementary flows,resource,ground,,,Lithium,1.72102E-10
+Elementary flows,resource,ground,,,Beryllium,1.11567E-10
+Elementary flows,resource,ground,,,Gold,9.8086E-11
+Elementary flows,resource,ground,,,Cobalt,5.57835E-11
+Elementary flows,resource,ground,,,Palladium,5.67132E-12
+Elementary flows,resource,ground,,,Rhenium ore,3.95133E-12
+Elementary flows,resource,ground,,,Platinum,1.69675E-12

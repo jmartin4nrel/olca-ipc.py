@@ -22,7 +22,7 @@ def main():
 
     # First we create a connection to the IPC server. The `Client` class
     # provides all the methods we need to communicate with the IPC server.
-    client = olca.Client(8080)
+    client = olca.Client(8081)
 
     # Search for the flow property `Mass` and unit `kg` in the database.
     # The `find` method does not return a full data set but just a reference

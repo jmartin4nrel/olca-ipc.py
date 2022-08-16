@@ -1,5 +1,6 @@
 import logging as log
 import os
+from numpy import Inf
 
 import requests
 import olca.schema as schema
@@ -488,22 +489,64 @@ class Client(object):
                  type from the databases or ``None`` if there is no such data
                  set in the database.
         """
-        if list_all:
-            d_list = []
+        
+        # Create list of object descriptors
+        d_list = []
+
+        # Set initial match criteria to infinity (best match is lowest)
+        best_match = Inf
+
+        # Set current and best match indexes to zero
+        idx = 0
+        best_match_idx = 0
+        
+        # Loop through model descriptors in data set
         for d in self.get_descriptors(model_type):
-            if name in d.name:
-                if category_path == []:
-                    if list_all:
-                        d_list.append(d)
+            # If descriptor name CONTAINS the name being searched for (or vice versa)
+            if name.lower() in d.name.lower() or d.name.lower() in name.lower():
+                # ...add it to the list of potential matches
+                idx += 1
+                d_list.append(d)
+                # Calculate mismatch between search name and actual name
+                mismatch = abs(len(d.name)-len(name))
+                # If categories, see if categories match search categories
+                if len(category_path) > 0:
+                    good_path = True
+                    cat_idx = 0
+                    min_cat_len = min([len(category_path),len(d.category_path)])
+                    while good_path and cat_idx < min_cat_len:
+                        good_path = (category_path[cat_idx].lower() \
+                                    in d.category_path[cat_idx].lower()) \
+                                    or (d.category_path[cat_idx].lower() \
+                                    in category_path[cat_idx].lower())
+                        if good_path:
+                            # Calculate mismatch based on category name length difference
+                            mismatch += abs(len(d.category_path[cat_idx]) \
+                                        - len(category_path[cat_idx]))
+                            cat_idx += 1
                     else:
-                        return d
-                elif d.category_path[0:len(category_path)] == category_path:
-                    d_list.append(d)
+                        search_path_longer = len(category_path) > len(d.category_path)
+                        new_cat_idx = cat_idx
+                        if search_path_longer:
+                            while new_cat_idx < len(category_path):
+                                mismatch += len(category_path[new_cat_idx])
+                                new_cat_idx += 1
+                        else:
+                            while new_cat_idx < len(d.category_path):
+                                mismatch += len(d.category_path[new_cat_idx])
+                                new_cat_idx += 1
+                if mismatch < best_match:
+                    best_match = mismatch
+                    best_match_idx = idx-1
+                        
         if list_all:
             if len(d_list) == 1:
                 return d_list[0]
             elif len(d_list) > 1: 
                 return d_list
+        elif best_match < Inf:
+            return d_list[best_match_idx]
+
 
     def get_providers_of(self, flow: Union[schema.Ref, schema.Flow]) \
             -> Iterator[schema.Ref]:
