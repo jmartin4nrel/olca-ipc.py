@@ -12,7 +12,7 @@ def main():
     client = olca.Client(8081)
 
     # Create flow
-    name = '1-Pentene copy'
+    name = '1-Pentene copy 2'
     flow = olca.Flow()
     flow.olca_type = 'Flow'
     flow.id = str(uuid.uuid4())
@@ -22,13 +22,8 @@ def main():
     flow.flow_type = olca.FlowType.ELEMENTARY_FLOW
     factor = olca.FlowPropertyFactor()
     factor.conversion_factor = 1.0
-    category_name = 'Grid Mix 4.2'
+    category_name = 'NETL flows'
     category = client.find(olca.Category, category_name)
-    if category is None:
-        category = olca.Category()
-        category.id = str(uuid.uuid4())
-        category.name = category_name
-        client.insert(category)
     flow.category = category
     
     # Search for the flow property and unit 
@@ -45,8 +40,6 @@ def main():
     client.insert(flow)
 
     # Set TRACI factors
-    Test = client.find(olca.ImpactMethod, 'ILCD 2011, midpoint [v1.0.10, August 2016]')
-    
     TRACI = client.find(olca.ImpactMethod, 'TRACI 2.1 (NETL)')
     impact_cats = ['Acidification Potential - TRACI 2.1 (NETL)',
                     'Eutrophication Potential - TRACI 2.1 (NETL)',

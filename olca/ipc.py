@@ -476,13 +476,14 @@ class Client(object):
             yield clazz.from_json(r)
 
     def find(self, model_type: ModelType, name: str, list_all:bool=False, \
-            category_path:list=[]) -> Optional[schema.Ref]:
+             exact_match:bool=False, category_path:list=[]) -> Optional[schema.Ref]:
         """Searches for a data set with the given type and name.
 
         :param model_type: The class of the data set, e.g. `olca.Flow`.
         :param name: The name of the data set.
         :optional param list_all: boolean, whether to list all instance of this
                 name in the database. Return list of Refs if true, Ref if false.
+        :optional param exact_match: boolean, whether match needs to be exact.
         :optional param category_path: list of subfolders containing data set.
                  If not passed, searches for the first data set in the database.
         :return: The reference to the first data set with the given name and
@@ -505,8 +506,9 @@ class Client(object):
             # If descriptor name CONTAINS the name being searched for (or vice versa)
             if name.lower() in d.name.lower() or d.name.lower() in name.lower():
                 # ...add it to the list of potential matches
-                idx += 1
-                d_list.append(d)
+                if not exact_match:
+                    idx += 1
+                    d_list.append(d)
                 # Calculate mismatch between search name and actual name
                 mismatch = abs(len(d.name)-len(name))
                 # If categories, see if categories match search categories
@@ -535,15 +537,20 @@ class Client(object):
                             while new_cat_idx < len(d.category_path):
                                 mismatch += len(d.category_path[new_cat_idx])
                                 new_cat_idx += 1
-                if mismatch < best_match:
+                if exact_match and mismatch == 0:
+                    idx += 1
+                    d_list.append(d)
+                    best_match = mismatch
+                    best_match_idx = idx-1
+                elif not exact_match and mismatch < best_match:
                     best_match = mismatch
                     best_match_idx = idx-1
                         
         if list_all:
-            if len(d_list) == 1:
-                return d_list[0]
-            elif len(d_list) > 1: 
-                return d_list
+            # if len(d_list) == 1:
+            #     return d_list[0]
+            # elif len(d_list) > 1: 
+            return d_list
         elif best_match < Inf:
             return d_list[best_match_idx]
 

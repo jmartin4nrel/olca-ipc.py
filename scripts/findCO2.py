@@ -10,6 +10,6 @@ def main():
     client = olca.Client(8081)
 
     co2 = client.find(olca.Flow, 'Carbon dioxide, to soil or biomass stock', list_all=True, category_path=['Elementary flows','Emission to soil'])
-    asdf
+    
 if __name__ == '__main__':
     main()
